@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
@@ -30,7 +31,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const cartCount = useSelector((state: RootState) =>
-    state.cart.items.reduce((total, item) => total + (item.quantity || 1), 0)
+    state.cart.items.reduce((total : any, item : any) => total + (item.quantity || 1), 0)
   );
 
   const handleLogout = () => {
