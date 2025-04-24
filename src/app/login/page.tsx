@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/redux/featurs/userSlice';
 
 
 
@@ -23,6 +26,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const router = useRouter()
+    const dispatch = useDispatch();
 
 
     const handleLogin = async (e: React.FormEvent) => {
@@ -44,11 +48,16 @@ const LoginPage = () => {
                 // token decode and set userData to localStorage
                 const token = result.data.accessToken;
                 const decoded: DecodedToken = jwtDecode(token);
+
                 const userData = {
-                    id: decoded._id,
+                    _id: decoded._id,
                     email: decoded.email,
                     role: decoded.role,
                 };
+
+                dispatch(setUser({ user: userData, token }));
+
+           
 
                 localStorage.setItem('user', JSON.stringify(userData));
 

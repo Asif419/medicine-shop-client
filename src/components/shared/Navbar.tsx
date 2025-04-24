@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
 import Link from "next/link";
@@ -9,6 +10,8 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useUser } from '@/hooks/useUser';
 import toast from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { logout } from "@/redux/featurs/userSlice";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -23,8 +26,10 @@ const Navbar = () => {
   const [profileMenuOpen, setProfileMenuOpen] = useState(false);
   const { user, isLoggedIn, isAdmin } = useUser();
   const router = useRouter()
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
+    dispatch(logout());
     localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
 
