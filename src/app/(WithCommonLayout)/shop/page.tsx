@@ -24,12 +24,25 @@ const ShopPage = () => {
   const [filters, setFilters] = useState({ category: '', sort: '' });
   const [medicines, setMedicines] = useState<Medicine[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('https://medicine-shop-server-mu.vercel.app/api/medicine');
+        let endpoint = 'https://medicine-shop-server-mu.vercel.app/api/medicine';
+
+        if (searchTerm) {
+          endpoint += `?searchTerm=${searchTerm}`;
+        } else if (filters.category) {
+          endpoint += `?searchTerm=${filters.category}`;
+        }
+
+        if (!searchTerm && filters.sort) {
+          const sortQuery = `sortBy=price&sortOrder=${filters.sort === 'price-low-high' ? 'asc' : 'desc'}`;
+          endpoint += filters.category ? `&${sortQuery}` : `?${sortQuery}`;
+        }
+
+        const res = await fetch(endpoint);
         const data = await res.json();
         setMedicines(data.data || []);
       } catch (err) {
@@ -40,13 +53,11 @@ const ShopPage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [searchTerm, filters]);
 
   if (loading) {
     <Spinner />
   }
-
-
 
   return (
     <div className="px-6 md:px-24 py-16 bg-white">
@@ -60,10 +71,10 @@ const ShopPage = () => {
           onChange={(e) => setFilters({ ...filters, category: e.target.value })}
         >
           <option value="">All Categories</option>
-          <option value="pain-relief">Pain Relief</option>
-          <option value="diabetes">Diabetes</option>
-          <option value="vitamins">Vitamins</option>
-          <option value="antibiotics">Antibiotics</option>
+          <option value="Gastric">Gastric</option>
+          <option value="Diabetes">Diabetes</option>
+          <option value="Fever">Fever</option>
+          <option value="Body Pain">Body Pain</option>
         </select>
 
         <select
@@ -74,8 +85,15 @@ const ShopPage = () => {
           <option value="">Sort by</option>
           <option value="price-low-high">Price: Low to High</option>
           <option value="price-high-low">Price: High to Low</option>
-          <option value="name">Name A-Z</option>
         </select>
+
+        <input
+          type="text"
+          placeholder="Search medicine..."
+          className="border border-gray-300 rounded-lg px-4 py-2"
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
+        />
       </div>
 
       {/* Medicines Grid */}

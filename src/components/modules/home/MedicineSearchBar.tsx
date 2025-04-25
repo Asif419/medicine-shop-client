@@ -1,13 +1,50 @@
 'use client';
 
+type Medicine = {
+  _id: string;
+  name: string;
+  company: string;
+  image: string;
+  price: number;
+  type: string;
+  symptoms: string[];
+  description: string;
+  quantity: number;
+  inStock: boolean;
+  prescriptionRequired: boolean;
+  manufactureDetails: string;
+  expiryDate: string;
+};
+
 import { useState } from 'react';
+import MedicineCard from '@/components/modules/shop/MedicineCard';
+import Spinner from '@/components/ui/Spinner';
 
 const MedicineSearchBar = () => {
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState('');
+  const [medicines, setMedicines] = useState<Medicine[]>([]);
+  const [loading, setLoading] = useState(false);
 
-  const handleSearch = () => {
-    console.log('Search:', { query, category });
+  const handleSearch = async () => {
+    setLoading(true);
+    let endpoint = 'https://medicine-shop-server-mu.vercel.app/api/medicine';
+
+    if (query) {
+      endpoint += `?searchTerm=${query}`;
+    } else if (category) {
+      endpoint += `?searchTerm=${category}`;
+    }
+
+    try {
+      const res = await fetch(endpoint);
+      const data = await res.json();
+      setMedicines(data.data?.slice(0, 4) || []);
+    } catch (err) {
+      console.error('Search failed:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -26,11 +63,10 @@ const MedicineSearchBar = () => {
           className="w-full md:w-1/3 px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black"
         >
           <option value="">All Categories</option>
-          <option value="pain-relief">Pain Relief</option>
-          <option value="diabetes">Diabetes</option>
-          <option value="vitamins">Vitamins</option>
-          <option value="antibiotics">Antibiotics</option>
-          {/* Add more categories as needed */}
+          <option value="Gastric">Gastric</option>
+          <option value="Diabetes">Diabetes</option>
+          <option value="Fever">Fever</option>
+          <option value="Body Pain">Body Pain</option>
         </select>
         <button
           onClick={handleSearch}
@@ -39,8 +75,19 @@ const MedicineSearchBar = () => {
           Search
         </button>
       </div>
+
+      {/* Search Results */}
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        {loading ? (
+          <div className="col-span-4 flex justify-center"><Spinner /></div>
+        ) : (
+          medicines.map((medicine) => (
+            <MedicineCard key={medicine._id} medicine={medicine} />
+          ))
+        )}
+      </div>
     </section>
   );
-}
+};
 
 export default MedicineSearchBar;
