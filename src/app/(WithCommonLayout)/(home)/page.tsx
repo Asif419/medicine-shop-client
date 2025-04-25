@@ -4,13 +4,13 @@
 import BrandingSection from "@/components/modules/home/BrandingSection";
 import CustomerReviews from "@/components/modules/home/customerReview";
 import FeaturedMedicines from "@/components/modules/home/FeaturedMedicine";
-import MedicineSearchBar from "@/components/modules/home/MedicineSearchBar";
+// import MedicineSearchBar from "@/components/modules/home/MedicineSearchBar";
 
 const HomePage = () => {
   return (
     <div>
       <BrandingSection />
-      <MedicineSearchBar />
+      {/* <MedicineSearchBar /> */}
       <FeaturedMedicines />
       <CustomerReviews />
     </div>
