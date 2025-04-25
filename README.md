@@ -108,11 +108,11 @@ Coming soon...
 
 ## 👨‍💻 Author
 
-**Md Asif Shahariar**  
+<!-- **Md Asif Shahariar**  
 Frontend Developer | React & Next.js Specialist  
 [Portfolio](#) | [LinkedIn](https://www.linkedin.com/) | [GitHub](https://github.com/)
 
----
+--- -->
 
 > If you found this project useful, feel free to ⭐️ the repo and share it!
 

@@ -34,6 +34,7 @@ const cartSlice = createSlice({
     },
     incrementQuantity(state, action: PayloadAction<string>) {
       const item = state.items.find(item => item._id === action.payload);
+      console.log(item);
       if (item) {
         item.quantity += 1;
       }

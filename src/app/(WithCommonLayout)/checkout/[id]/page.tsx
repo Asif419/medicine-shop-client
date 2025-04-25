@@ -7,6 +7,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { removeFromCart } from '@/redux/featurs/cartSlice';
 import { useParams } from 'next/navigation';
+import toast from 'react-hot-toast';
+
+const isValidUrl = (url: string) => {
+    try {
+        new URL(url);
+        return true;
+    } catch {
+        return false;
+    }
+};
 
 const CheckoutPage = () => {
     const [prescriptionRequired] = useState(true);
@@ -27,12 +37,17 @@ const CheckoutPage = () => {
     const handleConfirm = async () => {
         try {
             if (!selectedPayment) {
-                alert('Please select a payment method.');
+                toast.error('Please select a payment method.');
                 return;
             }
 
             if (!selectedItem) {
-                alert('No matching product found in cart.');
+                toast.error('No matching product found in cart.');
+                return;
+            }
+
+            if (selectedItem.prescriptionRequired && !isValidUrl(prescriptionImage)) {
+                toast.error("Please provide a valid prescription image URL.");
                 return;
             }
 
@@ -62,7 +77,7 @@ const CheckoutPage = () => {
                     router.push('/orders');
                 }
             } else {
-                alert('Failed to place the order');
+                toast.error("Stock limit exceed")
             }
 
         } catch (err) {

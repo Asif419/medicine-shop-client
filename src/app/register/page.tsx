@@ -7,6 +7,7 @@ import { Eye, EyeOff, Home } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -21,7 +22,7 @@ const RegisterPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirm) {
-      alert("Passwords do not match");
+      toast.error("Passwords do not match");
       return;
     }
 
@@ -40,13 +41,13 @@ const RegisterPage = () => {
 
       const result = await res.json();
       if (result.success) {
-        alert("Registration successful!");
+        toast.success("Registration successful!");
         router.push('/login')
       } else {
-        alert(result.message || "Registration failed");
+        toast.error(result.message || "Registration failed");
       }
     } catch {
-      alert("Something went wrong");
+      toast.error("Something went wrong");
     }
   };
 

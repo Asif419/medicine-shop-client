@@ -1,7 +1,7 @@
 import Spinner from "@/components/ui/Spinner";
 
-const lodding = () => {
+const Loadding = () => {
   return <Spinner />;
 };
 
-export default lodding;
+export default Loadding;
