@@ -67,6 +67,14 @@ NEXT_PUBLIC_API_URL=https://your-backend-api.com
 
 ---
 
+## 🌐 My Projects Backend Git Link
+
+```env
+https://github.com/Asif419/medicine-shop-server
+```
+
+---
+
 ## 🚀 Deployment
 
 This project is **deployed on Vercel**:
