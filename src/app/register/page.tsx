@@ -127,7 +127,7 @@ const RegisterPage = () => {
             </div>
           </div>
 
-          <Button type="submit" className="w-full">Register</Button>
+          <Button type="submit" className="bg-white text-black w-full py-2 rounded-lg border border-black hover:bg-black hover:text-white transition-all duration-500 ease-in-out font-medium">Register</Button>
         </form>
 
         {/* Redirect to login */}

@@ -72,7 +72,7 @@ const LoginPage = () => {
                 toast.error("Login failed: " + result.message);
             }
         } catch (err) {
-            // toast.error("Login error:", err);
+            // toast.error("Login error:", err);p
             console.error("Login error:", err);
         }
     };
@@ -92,6 +92,33 @@ const LoginPage = () => {
                 </div>
                 <p className="text-muted-foreground mb-6">Log in to your MediMart account</p>
 
+                <div className="mb-4">
+                  <h3 className="font-medium text-sm mb-2 text-primary">Demo Credentials:</h3>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className=" border-b-neutral-500"
+                      onClick={() => {
+                        setEmail("asif@gmail.com");
+                        setPassword("1234");
+                      }}
+                    >
+                      User Credentials
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className=" border-b-neutral-500"
+                      onClick={() => {
+                        setEmail("pa@gmail.com");
+                        setPassword("12345678");
+                      }}
+                    >
+                      Admin Credentials
+                    </Button>
+                  </div>
+                </div>
                 <form className="space-y-6" onSubmit={handleLogin}>
                     {/* Email */}
                     <div>
@@ -128,7 +155,7 @@ const LoginPage = () => {
                     </div>
 
                     {/* Submit */}
-                    <Button type="submit" className="w-full">Log In</Button>
+                    <Button type="submit" className="bg-white text-black w-full py-2 rounded-lg border border-black hover:bg-black hover:text-white transition-all duration-500 ease-in-out font-medium">Log In</Button>
 
                     {/* Register Link */}
                     <p className="text-sm text-center text-muted-foreground">
