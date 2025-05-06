@@ -39,7 +39,7 @@ const MedicineSearchBar = () => {
     try {
       const res = await fetch(endpoint);
       const data = await res.json();
-      setMedicines(data.data?.slice(0, 4) || []);
+      setMedicines(data.data?.slice(0, 5) || []);
     } catch (err) {
       console.error('Search failed:', err);
     } finally {
@@ -48,8 +48,8 @@ const MedicineSearchBar = () => {
   };
 
   return (
-    <section className="bg-gray-50 py-12 px-6 md:px-24">
-      <div className="max-w-5xl mx-auto bg-white p-6 rounded-xl shadow-md flex flex-col md:flex-row items-center gap-4">
+    <section className="bg-gray-50 py-6 px-6 md:px-24">
+      <div className="max-w-7xl mx-auto bg-white p-6 rounded-xl shadow-md flex flex-col md:flex-row items-center gap-4">
         <input
           type="text"
           placeholder="Search by medicine name..."
@@ -77,9 +77,9 @@ const MedicineSearchBar = () => {
       </div>
 
       {/* Search Results */}
-      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-7xl mx-auto">
         {loading ? (
-          <div className="col-span-4 flex justify-center"><Spinner /></div>
+          <div className="col-span-5 flex justify-center"><Spinner /></div>
         ) : (
           medicines.map((medicine) => (
             <MedicineCard key={medicine._id} medicine={medicine} />

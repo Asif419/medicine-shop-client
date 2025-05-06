@@ -60,7 +60,7 @@ const ShopPage = () => {
   }
 
   return (
-    <div className="px-6 md:px-24 py-16 bg-white">
+    <div className="px-6 md:px-36 py-16 bg-white">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">Shop All Medicines</h1>
 
       {/* Filters */}
@@ -97,7 +97,7 @@ const ShopPage = () => {
       </div>
 
       {/* Medicines Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6">
         {medicines.map((med) => (
           <MedicineCard key={med?._id} medicine={med} />
         ))}

@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const AboutPage = () => {
     return (
-        <main className="max-w-6xl mx-auto px-4 py-12 space-y-20">
+        <main className="px-6 md:px-36 py-16 space-y-20">
 
             {/* Hero Section */}
             <section className="text-center space-y-4">
