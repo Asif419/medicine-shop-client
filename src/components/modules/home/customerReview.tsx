@@ -10,37 +10,37 @@ type Review = {
 const reviews: Review[] = [
   {
     id: 1,
-    name: 'Amit S.',
+    name: 'Asif S.',
     rating: 5,
     comment: 'Super fast delivery and genuine medicines. Highly recommend MediMart!',
   },
   {
     id: 2,
-    name: 'Neha R.',
+    name: 'Mahmud P.',
     rating: 4,
     comment: 'Easy to search and order. Packaging was clean and professional.',
   },
   {
     id: 3,
-    name: 'Rahul K.',
+    name: 'Rezwan H.',
     rating: 5,
     comment: 'Excellent customer service and reliable products.',
   },
   {
     id: 4,
-    name: 'Priya M.',
+    name: 'Al-amin',
     rating: 4,
     comment: 'App is simple to use. Delivery was on time and well-handled.',
   },
   {
     id: 5,
-    name: 'Suresh V.',
+    name: 'PH Team',
     rating: 5,
     comment: 'MediMart is now my go-to for all my prescriptions. Trustworthy!',
   },
   {
     id: 6,
-    name: 'Anjali D.',
+    name: 'Jhankar M.',
     rating: 5,
     comment: 'Loved the experience. Clear instructions and very prompt!',
   },

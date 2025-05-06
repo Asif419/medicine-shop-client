@@ -98,6 +98,14 @@ NEXT_PUBLIC_API_URL=https://your-backend-api.com
 - `vite` ^6.2.0
 ---
 
+## 🌐 My Projects Backend Git Link
+
+```env
+https://github.com/Asif419/medicine-shop-server
+```
+
+---
+
 ## 🚀 Deployment
 
 This project is **deployed on Vercel**:
@@ -131,11 +139,11 @@ Coming soon...
 
 ## 👨‍💻 Author
 
-**Md Asif Shahariar**  
+<!-- **Md Asif Shahariar**  
 Frontend Developer | React & Next.js Specialist  
 [Portfolio](#) | [LinkedIn](https://www.linkedin.com/) | [GitHub](https://github.com/)
 
----
+--- -->
 
 > If you found this project useful, feel free to ⭐️ the repo and share it!
 

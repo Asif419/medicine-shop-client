@@ -62,7 +62,11 @@ const AddMedicinePage = () => {
             ...data,
             price: parseFloat(data.price as unknown as string),
             quantity: parseInt(data.quantity as unknown as string, 10),
-            symptoms: data.symptoms,
+            symptoms: typeof data.symptoms === 'string'
+              ? (data.symptoms as string).split(',').map((s: string) => s.trim())
+              : [],
+            inStock: true,
+            prescriptionRequired: data.prescriptionRequired || false,
           };
           handleSubmitForm(payload);
           reset();
@@ -110,10 +114,6 @@ const AddMedicinePage = () => {
           <textarea {...register('description')} placeholder="e.g. It Will help to reduce..." className="border px-4 py-2 rounded w-full" rows={4} required />
         </div>
         <div className="flex items-center gap-6 md:col-span-2">
-          <label className="flex items-center gap-2 text-sm text-gray-700">
-            <input {...register('inStock')} type="checkbox" className="checkbox" />
-            In Stock
-          </label>
           <label className="flex items-center gap-2 text-sm text-gray-700">
             <input {...register('prescriptionRequired')} type="checkbox" className="checkbox" />
             Prescription Required

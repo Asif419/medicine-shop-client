@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addToCart } from '@/redux/featurs/cartSlice';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
+import Spinner from '@/components/ui/Spinner';
 
 const MedicineDetails = () => {
   const { id } = useParams();
@@ -20,7 +21,9 @@ const MedicineDetails = () => {
     manufacturer: string;
     expiryDate: string;
     image: string;
+    quantity: number;
   }
+  const [loading, setLoading] = useState(true);
 
   const [medicine, setMedicine] = useState<Medicine | null>(null);
   const router = useRouter();
@@ -30,11 +33,18 @@ const MedicineDetails = () => {
       const res = await fetch(`https://medicine-shop-server-mu.vercel.app/api/medicine/${id}`);
       const data = await res.json();
       setMedicine(data.data);
+      setLoading(false);
     };
     fetchMedicine();
   }, [id]);
 
-  if (!medicine) return <p>Loading...</p>;
+  if (loading || !medicine) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Spinner />
+      </div>
+    );
+  }
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...medicine, quantity: 1 }));
@@ -61,9 +71,14 @@ const MedicineDetails = () => {
             {medicine.prescriptionRequired ? 'Yes' : 'No'}
           </p>
           <p className="text-2xl font-semibold text-black mb-6">৳{medicine.price}</p>
+          <p className="text-gray-700 mb-2"><strong>Stock:</strong> {medicine.quantity > 0 ? medicine.quantity : 'Out of stock'}</p>
+          <p className="text-gray-700 mb-6"><strong>Expiry Date:</strong> {new Date(medicine.expiryDate).toLocaleDateString()}</p>
           <button
             onClick={handleAddToCart}
-            className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
+            disabled={medicine.quantity === 0}
+            className={`px-6 py-3 rounded-lg transition text-white ${
+              medicine.quantity === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-black hover:bg-gray-800'
+            }`}
           >
             Add to Cart
           </button>

@@ -16,8 +16,8 @@ const FeaturedMedicines = ({ medicine }: { medicine: Medicine[] }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {medicine.slice(0, 4).map((med) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+          {medicine.slice(0, 5).map((med) => (
             <MedicineCard key={med._id} medicine={med} />
           ))}
         </div>

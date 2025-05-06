@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ShoppingCart, User, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useUser } from '@/hooks/useUser';
@@ -19,6 +18,7 @@ const navLinks = [
   { label: "Shop", href: "/shop" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Location", href: "/location" },
 ];
 
 const Navbar = () => {
@@ -78,12 +78,6 @@ const Navbar = () => {
 
         {/* Right: Actions */}
         <div className="flex items-center gap-3">
-          {/* Search Input (Large screens) */}
-          <Input
-            type="text"
-            placeholder="Search..."
-            className="hidden lg:block w-64"
-          />
 
           {/* Cart */}
           <Link href="/cart" className="relative">
@@ -114,20 +108,7 @@ const Navbar = () => {
               </button>
               {profileMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-md z-50">
-                  <Link
-                    href="/cart"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setProfileMenuOpen(false)}
-                  >
-                    Cart
-                  </Link>
-                  <Link
-                    href="/orders"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    onClick={() => setProfileMenuOpen(false)}
-                  >
-                    Order History
-                  </Link>
+
                   <Link
                     href="/profile"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -141,10 +122,25 @@ const Navbar = () => {
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       onClick={() => setProfileMenuOpen(false)}
                     >
-                      Dashboard
+                      Admin Dashboard
                     </Link>
                     :
-                    null
+                    <>
+                      <Link
+                        href="/cart"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setProfileMenuOpen(false)}
+                      >
+                        Cart
+                      </Link>
+                      <Link
+                        href="/orders"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setProfileMenuOpen(false)}
+                      >
+                        Order History
+                      </Link>
+                    </>
                   }
 
                   <button

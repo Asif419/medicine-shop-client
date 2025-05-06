@@ -82,7 +82,6 @@ const AdminOrdersPage = () => {
 
   const handleEdit = async (order: Order, click: string) => {
     let updateStatus: string = '';
-
     if (click == "Cancelled") {
       updateStatus = "Cancelled"
     } else {
@@ -106,6 +105,8 @@ const AdminOrdersPage = () => {
 
     // Performing update order
     const token = localStorage.getItem('accessToken');
+    // TODO:
+    // console.log(order.customer)
     try {
       const res = await fetch(`https://medicine-shop-server-mu.vercel.app/api/orders/update-order`, {
         method: 'PATCH',

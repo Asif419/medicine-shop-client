@@ -11,6 +11,8 @@ const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const router = useRouter();
 
+  console.log(cartItems)
+
   const total = cartItems.reduce(
     (sum, item) => sum + item.price * (item.quantity || 1),
     0
