@@ -18,6 +18,7 @@ const navLinks = [
   { label: "Shop", href: "/shop" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Location", href: "/location" },
 ];
 
 const Navbar = () => {

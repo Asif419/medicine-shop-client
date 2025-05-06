@@ -11,7 +11,7 @@ const FAQSection = () => {
                     <AccordionItem value="item-1">
                         <AccordionTrigger>Do you take my insurance?</AccordionTrigger>
                         <AccordionContent>
-                            At this time, MediMart does not support direct insurance claims. However, we provide detailed invoices with every order, which you can submit to your insurance provider for reimbursement. We're actively working on integrating insurance options in the near future to make your experience even smoother.
+                            At this time, MediMart does not support direct insurance claims. However, we provide detailed invoices with every order, which you can submit to your insurance provider for reimbursement. We&aposre actively working on integrating insurance options in the near future to make your experience even smoother.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-2">
