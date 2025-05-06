@@ -1,16 +1,19 @@
 'use client';
 
-import Spinner from '@/components/ui/Spinner';
-import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import coverImage from '@/assets/images/cover.jpg';
+import Spinner from '@/components/ui/Spinner';
+import profileImage from '@/assets/images/profile.jpg';
+import cardImage from '@/assets/images/card.jpg';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 const ProfilePage = () => {
     const router = useRouter();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        phone: '',
-        address: '',
     });
     const [loading, setLoading] = useState(true);
 
@@ -26,12 +29,7 @@ const ProfilePage = () => {
                 const result = await res.json();
                 if (result.success) {
                     const { name, email } = result.data;
-                    setFormData({
-                        name,
-                        email,
-                        phone: '',
-                        address: '',
-                    });
+                    setFormData({ name, email });
                 }
             } catch (error) {
                 console.error('Error fetching profile:', error);
@@ -51,66 +49,105 @@ const ProfilePage = () => {
         );
     }
 
-    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     const { name, value } = e.target;
-    //     setFormData((prev) => ({ ...prev, [name]: value }));
-    // };
-
-    // const handleSubmit = (e: React.FormEvent) => {
-    //     e.preventDefault();
-    // };
-
     return (
-        <div className="min-h-screen px-16 py-16 bg-white flex justify-center">
-            {/* <form
-                onSubmit={handleSubmit}
-                className="w-full max-w-2xl space-y-6 bg-gray-50 p-8 rounded-xl shadow"
-            >
-                <h1 className="text-3xl font-bold text-gray-900 mb-4">Your Profile</h1>
+        <div className="min-h-screen bg-white">
+            <div className="relative w-full h-64">
+                <Image src={coverImage} alt="Cover" fill className="object-cover" />
+            </div>
 
-                <div className="space-y-2">
-                    <label className="block text-gray-700 font-medium">Name</label>
-                    <input
-                        type="text"
-                        name="name"
-                        className="w-full border rounded-lg px-4 py-2"
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
+            <div className="max-w-6xl mx-auto py-10 px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="h-full">
+                        <CardHeader>
+                            <CardTitle>Personal Info</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="flex items-center gap-4 mb-4">
+                                <Image src={profileImage} alt="Profile" className="w-16 h-16 rounded-full" />
+                                <div>
+                                    <p className="text-sm text-gray-500">Name</p>
+                                    <p className="font-semibold">{formData.name}</p>
+                                </div>
+                            </div>
+                            <p className="text-sm text-gray-500">Email</p>
+                            <p className="font-semibold mb-2">{formData.email}</p>
+                            <p className="text-sm text-gray-500">Phone</p>
+                            <p className="font-semibold">+880 1234-567890</p>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="h-full">
+                        <CardHeader>
+                            <CardTitle>Account Details</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-2">
+                                <div>
+                                    <p className="text-sm text-gray-500">Account Created</p>
+                                    <p className="font-semibold">Jan 2023</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-500">Order History</p>
+                                    <p className="font-semibold">12 items</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-500">Password Last Changed</p>
+                                    <p className="font-semibold">3 months ago</p>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="h-full">
+                        <CardHeader>
+                            <CardTitle>Shipping Address</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-2">
+                                <div>
+                                    <p className="text-sm text-gray-500">Address</p>
+                                    <p className="font-semibold">123/A, Dhaka</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-500">City</p>
+                                    <p className="font-semibold">Dhaka</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-500">Country</p>
+                                    <p className="font-semibold">Bangladesh</p>
+                                </div>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className="h-full">
+                        <CardHeader>
+                            <CardTitle>Payment Method</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex justify-between items-center gap-4">
+                            <div className="space-y-2 flex-1">
+                                <div>
+                                    <p className="text-sm text-gray-500">Card Type</p>
+                                    <p className="font-semibold">VISA</p>
+                                </div>
+                                <div>
+                                    <p className="text-sm text-gray-500">Balance</p>
+                                    <p className="font-semibold">$1,000</p>
+                                </div>
+                            </div>
+                            <Image
+                                src={cardImage}
+                                alt="Card"
+                                className="w-40 h-28 object-cover rounded"
+                            />
+                        </CardContent>
+                    </Card>
                 </div>
 
-                <div className="space-y-2">
-                    <label className="block text-gray-700 font-medium">Email</label>
-                    <input
-                        type="email"
-                        name="email"
-                        className="w-full border rounded-lg px-4 py-2"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <button
-                    type="submit"
-                    className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition"
-                >
-                    Go to Homepage
-                </button>
-            </form> */}
-
-            <div className="min-h-screen bg-white flex justify-center py-12 px-4">
-                <div className="max-w-md w-full space-y-6">
-                    <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
-
-                    <div className="space-y-4 bg-gray-100 p-6 rounded-lg shadow">
-                        {/* <p><strong>Name:</strong> {user?.name}</p> */}
-                        <p><strong>Name:</strong> {formData?.name}</p>
-                        <p><strong>Email:</strong> {formData?.email}</p>
-                    </div>
-
+                <div className="text-center mt-10">
                     <button
                         onClick={() => router.push('/')}
-                        className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition"
+                        className="bg-black text-white px-6 py-3 rounded-lg hover:bg-gray-800 transition"
                     >
                         Go to Home
                     </button>
@@ -118,6 +155,6 @@ const ProfilePage = () => {
             </div>
         </div>
     );
-}
+};
 
 export default ProfilePage;
